@@ -6,6 +6,8 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
 import { Provider } from 'react-redux'
 
+import 'bootstrap/dist/css/bootstrap.css'
+
 const MOUNT_ELEMENT = document.getElementById('root')
 
 // Configure history for react-router

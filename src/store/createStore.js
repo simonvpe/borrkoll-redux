@@ -1,11 +1,17 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
-import thunk from 'redux-thunk'
+import { authenticationMiddleware } from 'routes/Authentication/middleware'
+import { checkAuthState } from 'routes/Authentication'
 
+import thunk from 'redux-thunk'
 import reducers from './reducers'
+import { remote } from './database'
 
 export default (initialState = {}, history) => {
-  let middleware = applyMiddleware(thunk, routerMiddleware(history))
+
+  const authMiddleware = authenticationMiddleware(remote, (action) => store.dispatch(action))
+
+  let middleware = applyMiddleware(thunk, routerMiddleware(history), authMiddleware)
 
   // Use DevTools chrome extension in development
   if (__DEBUG__) {
@@ -28,5 +34,7 @@ export default (initialState = {}, history) => {
     })
   }
 
+  store.dispatch(checkAuthState())
+  
   return store
 }

@@ -5,13 +5,15 @@ import { checkAuthState } from 'routes/Authentication'
 
 import thunk from 'redux-thunk'
 import reducers from './reducers'
-import { remote } from './database'
+import { remote, createCompanyDbMiddleware } from './database'
 
 export default (initialState = {}, history) => {
 
   const authMiddleware = authenticationMiddleware(remote, (action) => store.dispatch(action))
+  const companyDbMiddleware = createCompanyDbMiddleware()
 
-  let middleware = applyMiddleware(thunk, routerMiddleware(history), authMiddleware)
+  let middleware = applyMiddleware(
+    thunk, routerMiddleware(history), authMiddleware, companyDbMiddleware)
 
   // Use DevTools chrome extension in development
   if (__DEBUG__) {

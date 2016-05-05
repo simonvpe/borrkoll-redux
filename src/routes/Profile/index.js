@@ -1,6 +1,5 @@
 import { requireAuth } from 'routes/Authentication'
 
-
 export const ProfileRoute = (store) => ({
   path: 'profile',
   getComponent (nextState, cb) {

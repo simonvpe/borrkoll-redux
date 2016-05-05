@@ -40,6 +40,16 @@ export const SignupRoute = (store) => ({
   }
 })
 
+export const ProfileRoute = (store) => ({
+  path: 'profile',
+  getComponent (nextState, cb) {
+    require.ensure([], (require) => {
+      const Profile = require('./containers/ProfilePageContainer').default
+      cb(null, Profile)
+    }, 'profile')
+  }
+})
+
 export const requireAuth = (db) => (nextState, replace, asyncTransition) => {
   return db.getSession((err, response) => {
     if (err) {

@@ -16,7 +16,7 @@ const NavMenu = (props: Props) => {
   if (user) {
     return (
       <NavDropdown title={props.user ? 'Profile' : 'Login'} eventKey={100}>
-        <IndexLinkContainer to='/'>
+        <IndexLinkContainer to='/profile'>
           <MenuItem eventKey='100.1'>Profile</MenuItem>
         </IndexLinkContainer>
         <LogoutLink>

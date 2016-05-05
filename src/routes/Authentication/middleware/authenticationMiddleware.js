@@ -14,21 +14,26 @@ const errorAction = (err) => ({ type: AUTHENTICATION_ERROR, payload: err })
 const loginAction = (user) => ({ type: AUTHENTICATED, payload: user })
 const logoutAction = () => ({ type: UNAUTHENTICATED })
 const logoutRedirect = () => (dispatch) => dispatch(routerActions.push('/login'))
-const loginRedirect = () => (dispatch) => dispatch(routerActions.push('/'))
+const loginRedirect = () => (dispatch) => dispatch(routerActions.push('/profile'))
+
+const getUser = (db, dispatch) => (username) => {
+  return db.getUser(username, (err, response) => {
+    if (err) {
+      dispatch(errorAction(err))
+      dispatch(logoutAction())
+    } else {
+      dispatch(loginAction(response))
+    }
+  })
+}
 
 const login = (db, dispatch) => (user) => {
-  db.login(user.email, user.password, (err, response) => {
+  return db.login(user.email, user.password, (err, response) => {
     if (err) {
       dispatch(errorAction(err))
     } else {
-      db.getUser(response.name, (err, response) => {
-        if (err) {
-          dispatch(errorAction(err))
-          dispatch(logoutAction())
-        } else {
-          dispatch(loginAction(response))
-          dispatch(loginRedirect())
-        }
+      getUser(db, dispatch)(response.name).then(() => {
+        dispatch(loginRedirect())
       })
     }
   })
@@ -69,6 +74,7 @@ const checkAuthState = (db, dispatch) => () => {
       dispatch(logoutAction())
     } else {
       console.log(response.userCtx.name, 'is logged in.')
+      getUser(db, dispatch)(response.userCtx.name)
       dispatch(loginAction(response))
     }
   })

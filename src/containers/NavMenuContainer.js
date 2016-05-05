@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { logout } from '../modules/authentication'
+import { logout } from 'routes/Authentication/modules/authentication'
 
-import NavMenu from '../components/NavMenu'
+import { NavMenu } from 'components/NavMenu'
 
 const mapActionCreators = {
   onLogout: logout

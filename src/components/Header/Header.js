@@ -1,7 +1,7 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import classes from './Header.scss'
-import { NavMenu } from 'routes/Authentication'
+import NavMenu from 'containers/NavMenuContainer'
 
 import Nav from 'react-bootstrap/lib/Nav'
 import NavItem from 'react-bootstrap/lib/NavItem'

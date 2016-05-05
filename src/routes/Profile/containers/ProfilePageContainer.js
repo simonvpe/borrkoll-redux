@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-//import {  } from '../modules/authentication'
 
 import ProfilePage from '../components/ProfilePage'
 

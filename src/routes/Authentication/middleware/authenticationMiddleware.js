@@ -1,4 +1,8 @@
 import { routerActions } from 'react-router-redux'
+
+import PouchDb from 'pouchdb'
+PouchDb.plugin(require('pouchdb-authentication'))
+
 import {
   AUTHENTICATION_LOGIN,
   AUTHENTICATION_SIGNUP,
@@ -23,6 +27,7 @@ const getUser = (db, dispatch) => (username) => {
       dispatch(logoutAction())
     } else {
       dispatch(loginAction(response))
+      return response
     }
   })
 }
@@ -32,7 +37,8 @@ const login = (db, dispatch) => (user) => {
     if (err) {
       dispatch(errorAction(err))
     } else {
-      getUser(db, dispatch)(response.name).then(() => {
+      getUser(db, dispatch)(response.name).then((response) => {
+        dispatch(loginAction(response))
         dispatch(loginRedirect())
       })
     }
@@ -76,12 +82,13 @@ const checkAuthState = (db, dispatch) => () => {
     } else {
       console.log(response.userCtx.name, 'is logged in.')
       getUser(db, dispatch)(response.userCtx.name)
-      dispatch(loginAction(response))
     }
   })
 }
 
-const createAuthenticationMiddleware = (db, dispatch) => {
+const createAuthenticationMiddleware = (url, dispatch) => {
+  const db = PouchDb(url)
+
   const actions = {
     [AUTHENTICATION_LOGIN]: login(db, dispatch),
     [AUTHENTICATION_SIGNUP]: signup(db, dispatch),

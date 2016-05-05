@@ -1,16 +1,13 @@
 import PouchDb from 'pouchdb'
+PouchDb.plugin(require('pouchdb-authentication'))
+PouchDb.debug.disable()
 
 import { AUTHENTICATION_STATE } from 'routes/Authentication/modules/authentication'
 const { AUTHENTICATED, UNAUTHENTICATED } = AUTHENTICATION_STATE
 
-export const REMOTE_URL = 'https://localhost:6984'
-
-PouchDb.plugin(require('pouchdb-authentication'))
-export const remote = PouchDb(REMOTE_URL, { skipSetup: true })
-
-const setupDatabase = (state) => (user) => {
+const setupDatabase = (url, state) => (user) => {
   state.local = PouchDb(user.name + '_' + user.companyId)
-  state.remote = PouchDb(REMOTE_URL + '/company_' + user.companyId)
+  state.remote = PouchDb(url + '/company_' + user.companyId)
   state.syncHandle = state.local.sync(state.remote, { live: true, retry: true })
 }
 
@@ -26,12 +23,12 @@ const teardownDatabase = (state) => () => {
   }
 }
 
-export const createCompanyDbMiddleware = (dispatch) => {
+export const createCompanyDbMiddleware = (url, dispatch) => {
 
   let state = {}
 
   const actions = {
-    [AUTHENTICATED]: setupDatabase(state),
+    [AUTHENTICATED]: setupDatabase(url, state),
     [UNAUTHENTICATED]: teardownDatabase(state)
   }
 

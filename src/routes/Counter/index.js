@@ -1,6 +1,5 @@
 import { injectReducer } from '../../store/reducers'
 import { requireAuth } from '../Authentication'
-import { remote } from 'store/database'
 
 export default (store) => ({
   path: 'counter',
@@ -22,6 +21,5 @@ export default (store) => ({
 
     /* Webpack named bundle   */
     }, 'counter')
-  },
-  onEnter: requireAuth(remote)
+  }
 })

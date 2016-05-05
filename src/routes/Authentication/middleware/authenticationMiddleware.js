@@ -59,6 +59,7 @@ const logout = (db, dispatch) => () => {
     if (err) {
       dispatch(errorAction(err))
     } else {
+      dispatch(logoutAction())
       dispatch(logoutRedirect())
     }
   })

@@ -1,5 +1,6 @@
 export { login, logout, signup, checkAuthState, reducer } from './modules/authentication'
 export { default as LogoutLink } from './containers/LogoutLinkContainer'
+export { default as NavMenu } from './containers/NavMenuContainer'
 
 export const LoginRoute = (store) => ({
   path: 'login',

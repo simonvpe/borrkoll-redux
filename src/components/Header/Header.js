@@ -1,25 +1,27 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import classes from './Header.scss'
-import LogoutLink from 'routes/Authentication'
+import { NavMenu } from 'routes/Authentication'
 
-export const Header = () => (
-  <div>
-    <h1>React Redux Starter Kit</h1>
-    <IndexLink to='/' activeClassName={classes.activeRoute}>
-      Home
-    </IndexLink>
-    {' · '}
-    <Link to='/counter' activeClassName={classes.activeRoute}>
-      Counter
-    </Link>
-    <Link to='/login' activeClassName={classes.activeRoute}>
-      Login
-    </Link>
-    <Link to='/signup/103156c1078bb91a0b45a1b7b300027a' activeClassName={classes.activeRoute}>
-      Signup
-    </Link>
-  </div>
-)
+import Nav from 'react-bootstrap/lib/Nav'
+import NavItem from 'react-bootstrap/lib/NavItem'
+import MenuItem from 'react-bootstrap/lib/MenuItem'
+import IndexLinkContainer from 'react-router-bootstrap/lib/IndexLinkContainer'
+
+export const Header = () => {
+
+  const handleSelect = (evt) => {
+    event.preventDefault()
+  }
+
+  return (
+    <Nav bsStyle='tabs' activeKey={1} onSelect={handleSelect}>
+      <IndexLinkContainer to='/'>
+        <NavItem eventKey={1}>Borrkoll</NavItem>
+      </IndexLinkContainer>
+      <NavMenu />
+    </Nav>
+  )
+}
 
 export default Header

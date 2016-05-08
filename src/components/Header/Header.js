@@ -7,6 +7,7 @@ import Nav from 'react-bootstrap/lib/Nav'
 import NavItem from 'react-bootstrap/lib/NavItem'
 import MenuItem from 'react-bootstrap/lib/MenuItem'
 import IndexLinkContainer from 'react-router-bootstrap/lib/IndexLinkContainer'
+import { RequiresAuthentication } from 'routes/Authentication'
 
 export const Header = () => {
 
@@ -19,6 +20,11 @@ export const Header = () => {
       <IndexLinkContainer to='/'>
         <NavItem eventKey={1}>Borrkoll</NavItem>
       </IndexLinkContainer>
+      <RequiresAuthentication>
+        <IndexLinkContainer to='/projects'>
+          <NavItem eventKey={2}>Projects</NavItem>
+        </IndexLinkContainer>
+      </RequiresAuthentication>
       <NavMenu />
     </Nav>
   )

@@ -1,5 +1,6 @@
 export { login, logout, signup, checkAuthState, reducer } from './modules/authentication'
 export { default as LogoutLink } from './containers/LogoutLinkContainer'
+export { default as RequiresAuthentication } from './containers/RequiresAuthenticationContainer'
 
 export const LoginRoute = (store) => ({
   path: 'login',
@@ -40,7 +41,11 @@ export const SignupRoute = (store) => ({
 })
 
 export const requireAuth = (store) => (nextState, replace, asyncTransition) => {
+  // TODO: If a user enters the URL directly the auth check will fail since
+  // it is delayed in middleware. Not sure how to solve this yet.
   if (!store.getState().auth.user) {
+    console.debug('Not logged in. Redirecting to /login')
+    console.debug(store.getState())
     replace('/login')
   }
   asyncTransition()

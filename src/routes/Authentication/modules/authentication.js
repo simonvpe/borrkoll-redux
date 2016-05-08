@@ -1,5 +1,3 @@
-import { routerActions } from 'react-router-redux'
-
 export const AUTHENTICATION_LOGIN = 'AUTHENTICATION_LOGIN'
 export const AUTHENTICATION_SIGNUP = 'AUTHENTICATION_SIGNUP'
 export const AUTHENTICATION_LOGOUT = 'AUTHENTICATION_LOGOUT'
@@ -19,11 +17,13 @@ export const logout = () => ({ type: AUTHENTICATION_LOGOUT })
 export const checkAuthState = () => ({ type: AUTHENTICATION_CHECK_STATE })
 
 const ACTION_HANDLERS = {
-  [AUTHENTICATED]: (state, action) => Object.assign({}, state, {
+  [AUTHENTICATED]: (state, action) => ({
+    ...state,
     user: action.payload
   }),
 
-  [UNAUTHENTICATED]: (state, action) => Object.assign({}, state, {
+  [UNAUTHENTICATED]: (state, action) => ({
+    ...state,
     user: undefined
   })
 }

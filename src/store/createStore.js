@@ -10,12 +10,16 @@ import { remote, createCompanyDbMiddleware } from './database'
 export default (initialState = {}, history) => {
 
   const url = 'https://localhost:6984'
-  
+
   const authMiddleware = authenticationMiddleware(url, (action) => store.dispatch(action))
   const companyDbMiddleware = createCompanyDbMiddleware(url)
 
   let middleware = applyMiddleware(
-    thunk, routerMiddleware(history), authMiddleware, companyDbMiddleware)
+    thunk,
+    authMiddleware,
+    companyDbMiddleware,
+    routerMiddleware(history)
+  )
 
   // Use DevTools chrome extension in development
   if (__DEBUG__) {
@@ -39,6 +43,6 @@ export default (initialState = {}, history) => {
   }
 
   store.dispatch(checkAuthState())
-  
+
   return store
 }

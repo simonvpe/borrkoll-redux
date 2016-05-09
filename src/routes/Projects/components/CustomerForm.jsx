@@ -54,7 +54,7 @@ class CustomerForm extends React.Component {
     let contactsWithIdx = contacts.map((contact, idx) => ({ contact, idx }))
     const emails = contactsWithIdx.filter((contact) => contact.contact.kind.value === 'email')
     const phones = contactsWithIdx.filter((contact) => contact.contact.kind.value === 'phone')
-    
+
     return (
       <div>
         <FormGroup>

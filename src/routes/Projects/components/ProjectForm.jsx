@@ -68,11 +68,16 @@ class ProjectForm extends React.Component {
   }
 
   render = () => {
-    const { fields: { _id, customer, address, holes, notes, tags }, handleSubmit } = this.props
+    const {
+      fields: { _id, customer, address, holes, notes, tags },
+      handleSubmit,
+      handleDismiss
+    } = this.props
+
     if (this.props.project) {
       console.log("Has project", this.props.project)
     }
-    console.log("id", _id)
+
     return (
       <Form horizontal onSubmit={handleSubmit}>
         <Row>
@@ -117,6 +122,7 @@ class ProjectForm extends React.Component {
              )}
           </tbody>
         </Table>
+        <Button onClick={handleDismiss}>Cancel</Button>        
         <Button type='submit'>Submit</Button>
       </Form>
     )

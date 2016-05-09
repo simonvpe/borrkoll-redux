@@ -28,7 +28,7 @@ export const ProjectsRoute = (store) => ({
     require.ensure([], (require) => {
       const Projects = require('./containers/ProjectListContainer').default
       const reducer = require('./modules/projects').reducer
-      console.log('Injecting reducer')
+
       injectReducer(store, { key: 'projects', reducer })
 
       cb(null, Projects)

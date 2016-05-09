@@ -11,25 +11,33 @@ const mapActionCreators = (dispatch, ownProps) => {
 
   return {
     onSubmit: id
-      ? (project) => dispatch(update(project))
+      ? (project) => {
+        dispatch(update(project))
+        dispatch(push('/projects'))
+      }
       : (project) => {
         const toSubmit = Object.assign({}, project, { _id: nextId() })
         dispatch(insert(toSubmit))
         dispatch(push('/projects'))
-      }
+      },
+    handleDismiss: () => dispatch(push('/projects'))
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   const { params: { id }, ...rest } = ownProps
-  console.log(state)
+
+  let initialValues
+
+  if (id) {
+    const project = state.projects.docs.filter((project) => project._id === id)[0]
+    initialValues = { ...project }
+  } else {
+    initialValues = { id: 'New Project' }
+  }
 
   return {
-    initialValues: {
-      _id: id
-        ? state.projects.docs.filter((project) => project._id === id)[0]
-        : 'New project'
-    },
+    initialValues,
     ...rest
   }
 }

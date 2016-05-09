@@ -60,7 +60,6 @@ class TagInput extends Component {
   }
 
   render = () => {
-    const { field, ...rest } = this.props
     const { suggestions } = this.state
     const tags = typeof this.state.tags === 'object' ? this.state.tags : []
     return (
@@ -73,14 +72,6 @@ class TagInput extends Component {
         classNames={style}
       />
     )
-    /* return (
-       <Tags {...field} {...rest} {...styling}
-       value={value}
-       onChange={(evt) => onChange(this.parse(evt))}
-       onBlur={(evt) => onBlur(this.parse(evt))}
-       renderTag={this.renderTag}
-       />
-       ) */
   }
 }
 

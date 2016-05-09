@@ -17,7 +17,7 @@ class RequiresAuthentication extends React.Component {
 }
 
 RequiresAuthentication.propTypes = {
-  user: React.PropTypes.object.isRequired
+  user: React.PropTypes.object
 }
 
 const mapActionCreators = {

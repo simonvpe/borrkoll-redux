@@ -73,26 +73,20 @@ class CustomerForm extends React.Component {
 
         <AddressForm {...address}/>
 
-        {
-          phones.map((contact, idx) => (
-            <ContactForm idx={idx + 1}
-                         key={idx}
-                         onRemove={() => contacts.removeField(contact.idx)}
-                         {...contact.contact} />
-          ))
-        }
-            {
-              emails.map((contact, idx) => (
-                <ContactForm idx={idx + 1}
-                             key={idx}
-                             onRemove={() => contacts.removeField(contact.idx)}
-                             {...contact.contact} />
-              ))
-            }
-        
-                <FormGroup>
-             <div style={{width:'100%'}}/>
-          <DropdownButton className='btn btn-success' title='Add contact'>
+        {phones.map((contact, idx) => <ContactForm
+                                          idx={idx + 1}
+                                          key={idx}
+                                          onRemove={() => contacts.removeField(contact.idx)}
+                                          {...contact.contact} />)}
+
+        {emails.map((contact, idx) => <ContactForm
+                                          idx={idx + 1} key={idx}
+                                          onRemove={() => contacts.removeField(contact.idx)}
+                                          {...contact.contact} />)}
+
+        <FormGroup>
+          <div style={{width: '100%'}}/>
+          <DropdownButton id='contact-dropdown' className='btn btn-success' title='Add contact'>
 
             <MenuItem eventKey={1} onClick={this.addPhoneContact}>
               <Glyphicon glyph='earphone'/> Phone

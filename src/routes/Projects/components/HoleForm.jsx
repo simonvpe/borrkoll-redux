@@ -31,7 +31,7 @@ class HoleForm extends React.Component {
 
   render = () => {
     const { onRemove, idx, kind, depth, tags } = this.props
-    const removeTooltip = <Tooltip><strong>Remove</strong></Tooltip>
+    const removeTooltip = <Tooltip id='remove-tooltip'><strong>Remove</strong></Tooltip>
 
     let label
     switch (kind.value) {

@@ -70,6 +70,7 @@ class TagInput extends Component {
         handleDrag={this.handleDrag}
         shouldRenderSuggestions={this.shouldRenderSuggestions}
         classNames={style}
+        {...this.props}
       />
     )
   }

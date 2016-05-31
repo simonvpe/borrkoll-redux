@@ -94,36 +94,41 @@ class ProjectForm extends React.Component {
             <AddressForm {...address} />
           </Col>
         </Row>
-        <FormGroup>
-          <DropdownButton className='btn btn-success' title='Add hole'>
+        <Row>
+          <legend>Holes</legend>                
+          <FormGroup>
+            <DropdownButton className='btn btn-default' title='Add hole'>
 
-            <MenuItem eventKey={1} onClick={this.addEnergyHole}>
-              Energy well
-            </MenuItem>
+              <MenuItem eventKey={1} onClick={this.addEnergyHole}>
+                Energy well
+              </MenuItem>
 
-            <MenuItem eventKey={2} onClick={this.addWaterHole}>
-              Water well
-            </MenuItem>
+              <MenuItem eventKey={2} onClick={this.addWaterHole}>
+                Water well
+              </MenuItem>
 
-          </DropdownButton>
-        </FormGroup>
-        <Table>
-          <thead>
-            <tr>
-              <th className='col-xs-1'>Kind</th>
-              <th className='col-xs-2'>Depth</th>
-              <th>Tags</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {holes.map((hole, idx) =>
-              <HoleForm key={idx} {...hole} onRemove={() => this.removeHole(idx)} />
-             )}
-          </tbody>
-        </Table>
-        <Button onClick={handleDismiss}>Cancel</Button>        
-        <Button type='submit'>Submit</Button>
+            </DropdownButton>
+          </FormGroup>
+          <Table>
+            <thead>
+              <tr>
+                <th className='col-xs-1'>Kind</th>
+                <th className='col-xs-2'>Depth</th>
+                <th>Tags</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {holes.map((hole, idx) =>
+                <HoleForm key={idx} {...hole} onRemove={() => this.removeHole(idx)} />
+               )}
+            </tbody>
+          </Table>
+        </Row>
+        <Row>
+          <Button onClick={handleDismiss}>Cancel</Button>        
+          <Button type='submit'>Submit</Button>
+        </Row>
       </Form>
     )
   }

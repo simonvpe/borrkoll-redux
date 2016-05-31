@@ -17,18 +17,18 @@ const HoleDetail = (props: Hole) => {
 
   return (
     <tr>
-    <td>
+      <td>
         <strong># {index}</strong>
-    </td>
-    <td>
+      </td>
+      <td>
         {kind}
-    </td>
-    <td>
+      </td>
+      <td>
         {depth}
-    </td>
-    <td>
+      </td>
+      <td>
         <TagInput field={{ value: tags }} readOnly />
-    </td>
+      </td>
     </tr>
   )
 }

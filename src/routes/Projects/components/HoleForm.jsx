@@ -11,6 +11,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 import Button from 'react-bootstrap/lib/Button'
 
+import DepthInput from './DepthInput'
 import PureInput from './PureInput'
 import TagInput from './TagInput'
 
@@ -46,7 +47,7 @@ class HoleForm extends React.Component {
         {label}
       </td>
       <td>
-        <PureInput name='depth' type='number' field={depth} title={depth.error}/>
+        <DepthInput name='depth' type='number' field={depth} title={depth.error}/>
       </td>
       <td>
         <TagInput field={tags} />

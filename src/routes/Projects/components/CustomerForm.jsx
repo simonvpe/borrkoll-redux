@@ -86,17 +86,12 @@ class CustomerForm extends React.Component {
 
         <FormGroup>
           <div style={{width: '100%'}}/>
-          <DropdownButton id='contact-dropdown' className='btn btn-success' title='Add contact'>
-
-            <MenuItem eventKey={1} onClick={this.addPhoneContact}>
-              <Glyphicon glyph='earphone'/> Phone
-            </MenuItem>
-
-            <MenuItem eventKey={2} onClick={this.addEmailContact}>
-              @ E-mail
-            </MenuItem>
-
-          </DropdownButton>
+          <Button className='btn btn-default' onClick={this.addPhoneContact}>
+            <span><Glyphicon glyph='earphone'/> Add phone</span>
+          </Button>
+          <Button className='btn btn-default' onClick={this.addEmailContact}>
+            <span><strong>@</strong> Add e-mail</span>
+          </Button>
         </FormGroup>
       </div>
     )
